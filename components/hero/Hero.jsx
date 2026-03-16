@@ -26,6 +26,8 @@ import TextAnimationDemo from "@/components/TextAnimationDemo";
 import AnimatedButtonDemo from "@/components/AnimatedButtonDemo";
 import StaggerListDemo from "@/components/StaggerListDemo";
 import DraggableCardDemo from "@/components/DraggableCardDemo";
+import AnimatePresenceDemo from "@/components/AnimatePresenceDemo";
+import StepSwitcherDemo from "@/components/StepSwitcherDemo";
 
 import { s } from "@/components/styles";
 
@@ -50,6 +52,10 @@ export default function Hero() {
       <StaggerListDemo />
       <div style={s.divider} />
       <DraggableCardDemo />
+      <div style={s.divider} />
+      <AnimatePresenceDemo />
+      <div style={s.divider} />
+      <StepSwitcherDemo />
     </section>
   );
 }
