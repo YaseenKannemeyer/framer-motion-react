@@ -1,8 +1,56 @@
 // ── styles.js ─────────────────────────────────────────────────
 // All shared inline styles used across the blog components.
 // Import this wherever you need consistent styling:
-//   import { s } from "./styles";
+//   import { s } from "@/components/styles";
+//   import { Divider } from "@/components/styles";
+//
+// The `divider` key in `s` is kept for static use (e.g. borders
+// inside table rows). For the section-level animated dividers
+// that separate content blocks, use the <Divider /> component.
 
+import { motion } from "framer-motion";
+
+// ── Animated Divider component ────────────────────────────────
+// Drop-in replacement for <div style={s.divider} />.
+// Renders a line that draws itself in from the left each time
+// it enters the page. Use this between every major section.
+//
+// Usage:
+//   import { Divider } from "@/components/styles";
+//   <Divider />                    ← full width, default delay
+//   <Divider width="40%" />        ← shorter line
+//   <Divider delay={0.2} />        ← custom delay
+//   <Divider accent />             ← blue → dark gradient
+//
+// How it works:
+//   The outer div clips overflow so the line is invisible at 0%.
+//   The motion.div animates width from 0% → target using a sharp
+//   expo-out curve [0.22, 1, 0.36, 1] — the same curve used in
+//   HeroHeader. This keeps all line animations feeling consistent.
+
+export function Divider({ width = "100%", delay = 0, accent = false }) {
+  return (
+    <div style={{ margin: "2.5rem 0", overflow: "hidden" }}>
+      <motion.div
+        initial={{ width: "0%" }}
+        animate={{ width }}
+        transition={{
+          duration: 0.7,
+          ease: [0.22, 1, 0.36, 1],
+          delay,
+        }}
+        style={{
+          height: "0.5px",
+          background: accent
+            ? "linear-gradient(to right, #4a9eff, #1c1c1c)"
+            : "linear-gradient(to right, #2a2a2a, #111)",
+        }}
+      />
+    </div>
+  );
+}
+
+// ── Shared styles object ──────────────────────────────────────
 export const s = {
   section: {
     minHeight: "100vh",
@@ -38,6 +86,8 @@ export const s = {
     maxWidth: "560px",
     marginBottom: "3.5rem",
   },
+  // Static divider — used for table row borders and internal card
+  // borders only. For section separators use <Divider /> instead.
   divider: {
     height: "0.5px",
     background: "#1e1e1e",

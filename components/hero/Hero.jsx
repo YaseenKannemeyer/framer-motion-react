@@ -1,20 +1,28 @@
 // ── Hero.jsx ──────────────────────────────────────────────────
 // Main entry component. Composes all sections in order.
+// "use client" here covers all child components — no need to
+// add it to any of the imports below.
 //
-// Each section is its own file — edit them independently:
-//
-//   HeroHeader.jsx       → badge, h1, subtitle
-//   InstallStep.jsx      → Step 1: npm / yarn install
-//   ImportStep.jsx       → Step 2: import { motion }
-//   PropsTable.jsx       → core props reference table
-//   EaseDemo.jsx         → interactive easing visualizer
-//   SpringSection.jsx    → duration, delay & spring docs
-//   TextAnimationDemo.jsx→ live "Hello, world!" example
-//
-// Shared utilities:
-//   styles.js            → all inline style objects
-//   utils.js             → cubic bezier solver + easingMap
+// Section order:
+//   HeroHeader           → animated title, stats, badge
+//   InstallStep          → npm / yarn install
+//   ImportStep           → import { motion }
+//   PropsTable           → core props reference table
+//   EaseDemo             → interactive easing visualiser
+//   SpringSection        → duration, delay & spring
+//   TextAnimationDemo    → live "Hello, world!" example
+//   AnimatedButtonDemo   → whileHover & whileTap + spring sliders
+//   StaggerListDemo      → variants & staggerChildren
+//   DraggableCardDemo    → drag, dragConstraints, dragElastic
+//   AnimatePresenceDemo  → exit animations, AnimatePresence
+//   StepSwitcherDemo     → view transitions, mode="wait"
+//   CollapsibleListDemo  → layout animation, FLIP technique
+//   LiveBadgeDemo        → keyframes, repeat, repeatType
+
 "use client";
+
+import React from "react";
+import { s, Divider } from "@/components/styles";
 
 import HeroHeader from "@/components/hero/HeroHeader";
 import InstallStep from "@/components/InstallStep";
@@ -28,34 +36,63 @@ import StaggerListDemo from "@/components/StaggerListDemo";
 import DraggableCardDemo from "@/components/DraggableCardDemo";
 import AnimatePresenceDemo from "@/components/AnimatePresenceDemo";
 import StepSwitcherDemo from "@/components/StepSwitcherDemo";
-
-import { s } from "@/components/styles";
+import CollapsibleListDemo from "@/components/CollapsibleListDemo";
+import LiveBadgeDemo from "@/components/LiveBadgeDemo";
 
 export default function Hero() {
   return (
     <section style={s.section}>
       <HeroHeader />
-      <div style={s.divider} />
+
+      {/* accent=true → blue gradient, matches HeroHeader's rule lines */}
+      <Divider accent />
+
       <InstallStep />
       <ImportStep />
-      <div style={s.divider} />
+
+      <Divider accent />
+
       <PropsTable />
-      <div style={s.divider} />
+
+      <Divider accent />
+
       <EaseDemo />
-      <div style={s.divider} />
+
+      <Divider accent />
+
       <SpringSection />
-      <div style={s.divider} />
+
+      <Divider accent />
+
       <TextAnimationDemo />
-      <div style={s.divider} />
+
+      <Divider accent />
+
       <AnimatedButtonDemo />
-      <div style={s.divider} />
+
+      <Divider accent />
+
       <StaggerListDemo />
-      <div style={s.divider} />
+
+      <Divider accent />
+
       <DraggableCardDemo />
-      <div style={s.divider} />
+
+      <Divider accent />
+
       <AnimatePresenceDemo />
-      <div style={s.divider} />
+
+      <Divider accent />
+
       <StepSwitcherDemo />
+
+      <Divider accent />
+
+      <CollapsibleListDemo />
+
+      <Divider accent />
+
+      <LiveBadgeDemo />
     </section>
   );
 }
