@@ -24,6 +24,9 @@ import EaseDemo from "@/components/EaseDemo";
 import SpringSection from "@/components/SpringSection";
 import TextAnimationDemo from "@/components/TextAnimationDemo";
 import AnimatedButtonDemo from "@/components/AnimatedButtonDemo";
+import StaggerListDemo from "@/components/StaggerListDemo";
+import DraggableCardDemo from "@/components/DraggableCardDemo";
+
 import { s } from "@/components/styles";
 
 export default function Hero() {
@@ -43,6 +46,10 @@ export default function Hero() {
       <TextAnimationDemo />
       <div style={s.divider} />
       <AnimatedButtonDemo />
+      <div style={s.divider} />
+      <StaggerListDemo />
+      <div style={s.divider} />
+      <DraggableCardDemo />
     </section>
   );
 }
