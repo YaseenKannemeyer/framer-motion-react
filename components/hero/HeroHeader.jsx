@@ -162,7 +162,48 @@ export default function HeroHeader() {
           marginBottom: "2.5rem",
         }}
       >
-        {/* Issue label */}
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "7px",
+            border: `0.5px solid ${C.accentDim}`,
+            borderRadius: "4px",
+            padding: "5px 12px",
+            background: "#050d18",
+          }}
+        >
+          {/* Pulsing dot */}
+          <motion.span
+            animate={{ opacity: [1, 0.2, 1] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            style={{
+              width: "6px",
+              height: "6px",
+              borderRadius: "50%",
+              background: C.accent,
+              display: "inline-block",
+              flexShrink: 0,
+            }}
+          />
+          <span
+            style={{
+              fontSize: "10px",
+              color: C.accent,
+              fontFamily: MONO,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+            }}
+          >
+            React Animation Blog
+          </span>
+        </motion.div>
+
+        {/* Issue label
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -175,7 +216,7 @@ export default function HeroHeader() {
           }}
         >
           Vol. 01
-        </motion.span>
+        </motion.span> */}
       </div>
 
       {/* ── Horizontal rule — expands from left ──────────── */}

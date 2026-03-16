@@ -1,23 +1,13 @@
 // ── Hero.jsx ──────────────────────────────────────────────────
-// Main entry component. Composes all sections in order.
-// "use client" here covers all child components — no need to
-// add it to any of the imports below.
+// Main entry component. Each section is wrapped in a <section>
+// tag with an `id` that matches the NAV_ITEMS in BlogNav.jsx.
+// The IntersectionObserver in BlogNav reads these ids to
+// determine which section is currently in view.
 //
-// Section order:
-//   HeroHeader           → animated title, stats, badge
-//   InstallStep          → npm / yarn install
-//   ImportStep           → import { motion }
-//   PropsTable           → core props reference table
-//   EaseDemo             → interactive easing visualiser
-//   SpringSection        → duration, delay & spring
-//   TextAnimationDemo    → live "Hello, world!" example
-//   AnimatedButtonDemo   → whileHover & whileTap + spring sliders
-//   StaggerListDemo      → variants & staggerChildren
-//   DraggableCardDemo    → drag, dragConstraints, dragElastic
-//   AnimatePresenceDemo  → exit animations, AnimatePresence
-//   StepSwitcherDemo     → view transitions, mode="wait"
-//   CollapsibleListDemo  → layout animation, FLIP technique
-//   LiveBadgeDemo        → keyframes, repeat, repeatType
+// LAYOUT PATTERN:
+//   app/layout.jsx renders <BlogNav /> alongside <Hero />.
+//   BlogNav is fixed-position so it overlays the content.
+//   No layout changes needed here — ids are all that matter.
 
 "use client";
 
@@ -38,61 +28,102 @@ import AnimatePresenceDemo from "@/components/AnimatePresenceDemo";
 import StepSwitcherDemo from "@/components/StepSwitcherDemo";
 import CollapsibleListDemo from "@/components/CollapsibleListDemo";
 import LiveBadgeDemo from "@/components/LiveBadgeDemo";
+import BlogFooter from "@/components/BlogFooter";
+
+// Thin wrapper that adds an id anchor to each section.
+// The id is what BlogNav's IntersectionObserver targets.
+function Section({ id, children }) {
+  return (
+    <div id={id} style={{ scrollMarginTop: "2rem" }}>
+      {children}
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
-    <section style={s.section}>
-      <HeroHeader />
-
-      {/* accent=true → blue gradient, matches HeroHeader's rule lines */}
-      <Divider accent />
-
-      <InstallStep />
-      <ImportStep />
+    <main style={s.section}>
+      <Section id="hero">
+        <HeroHeader />
+      </Section>
 
       <Divider accent />
 
-      <PropsTable />
+      <Section id="install">
+        <InstallStep />
+      </Section>
+
+      <Section id="import">
+        <ImportStep />
+      </Section>
 
       <Divider accent />
 
-      <EaseDemo />
+      <Section id="props">
+        <PropsTable />
+      </Section>
 
       <Divider accent />
 
-      <SpringSection />
+      <Section id="easing">
+        <EaseDemo />
+      </Section>
 
       <Divider accent />
 
-      <TextAnimationDemo />
+      <Section id="spring">
+        <SpringSection />
+      </Section>
 
       <Divider accent />
 
-      <AnimatedButtonDemo />
+      <Section id="text-anim">
+        <TextAnimationDemo />
+      </Section>
 
       <Divider accent />
 
-      <StaggerListDemo />
+      <Section id="button">
+        <AnimatedButtonDemo />
+      </Section>
 
       <Divider accent />
 
-      <DraggableCardDemo />
+      <Section id="stagger">
+        <StaggerListDemo />
+      </Section>
 
       <Divider accent />
 
-      <AnimatePresenceDemo />
+      <Section id="drag">
+        <DraggableCardDemo />
+      </Section>
 
       <Divider accent />
 
-      <StepSwitcherDemo />
+      <Section id="presence">
+        <AnimatePresenceDemo />
+      </Section>
 
       <Divider accent />
 
-      <CollapsibleListDemo />
+      <Section id="step-switcher">
+        <StepSwitcherDemo />
+      </Section>
 
       <Divider accent />
 
-      <LiveBadgeDemo />
-    </section>
+      <Section id="layout">
+        <CollapsibleListDemo />
+      </Section>
+
+      <Divider accent />
+
+      <Section id="badge">
+        <LiveBadgeDemo />
+      </Section>
+
+      <BlogFooter />
+    </main>
   );
 }
