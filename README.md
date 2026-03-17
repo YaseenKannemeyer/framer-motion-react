@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Framer Motion in React Blog
 
-## Getting Started
+Welcome to my blog dedicated to **Framer Motion**  in React! Here, I explore everything about creating smooth, interactive, and visually stunning animations in React applications using Framer Motion. Whether you’re a beginner or an advanced React developer, this blog provides tutorials, examples, and insights to level up your UI animations.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Visit the Blog
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Check out the website here: https://framer-motion-react-beta.vercel.app/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## About This Blog
 
-## Learn More
+This website covers:
 
-To learn more about Next.js, take a look at the following resources:
+-   **Getting Started with Framer Motion** – Learn how to set up Framer Motion in a React project.
+    
+-   **Animation Basics** – Dive into `motion`  components, props, and simple animations.
+    
+-   **Advanced Techniques** – Explore complex transitions, gestures, scroll-based animations, and shared layout animations.
+    
+-   **Practical Examples** – Real-world UI/UX implementations with code snippets.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
