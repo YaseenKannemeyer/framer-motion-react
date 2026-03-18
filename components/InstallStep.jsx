@@ -5,7 +5,7 @@
 // hero header has settled (delay: 0.5).
 
 import { motion } from "framer-motion";
-import { s } from "./styles";
+import { s, C } from "@/components/styles";
 
 export default function InstallStep() {
   return (

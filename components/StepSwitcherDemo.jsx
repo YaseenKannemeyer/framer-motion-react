@@ -30,7 +30,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { s } from "./styles";
+import { s, C } from "@/components/styles";
 
 // ── Step content ─────────────────────────────────────────────
 const STEPS = [
@@ -39,21 +39,21 @@ const STEPS = [
     label: "Step 1",
     title: "Install the package",
     body:  "Run npm install framer-motion in your project root.",
-    color: "#378ADD",
+    color: C.purple,
   },
   {
     key:   "step2",
     label: "Step 2",
     title: "Import motion",
     body:  'Add import { motion } from "framer-motion" at the top of your file.',
-    color: "#4ade80",
+    color: "#15803d",
   },
   {
     key:   "step3",
     label: "Step 3",
     title: "Wrap and animate",
     body:  "Replace any HTML element with its motion.* equivalent and add initial, animate, and transition props.",
-    color: "#f472b6",
+    color: C.purple,
   },
 ];
 
@@ -133,7 +133,7 @@ function StepSwitcher({ mode, duration, useDirection }) {
             style={{
               position: "absolute",
               inset: 0,
-              background: "#111",
+              background: C.surface,
               border: `0.5px solid ${current.color}33`,
               borderRadius: "10px",
               padding: "1.25rem 1.5rem",
@@ -146,10 +146,10 @@ function StepSwitcher({ mode, duration, useDirection }) {
             <div style={{ fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: current.color, fontFamily: "monospace" }}>
               {current.label}
             </div>
-            <div style={{ fontSize: "14px", fontWeight: 500, color: "#f5f0e8", fontFamily: "monospace" }}>
+            <div style={{ fontSize: "14px", fontWeight: 500, color: C.text, fontFamily: "monospace" }}>
               {current.title}
             </div>
-            <div style={{ fontSize: "12px", color: "#555", fontFamily: "monospace", lineHeight: 1.6 }}>
+            <div style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace", lineHeight: 1.6 }}>
               {current.body}
             </div>
           </motion.div>
@@ -165,8 +165,8 @@ function StepSwitcher({ mode, duration, useDirection }) {
           disabled={step === 0}
           style={{
             background: "transparent",
-            border: "0.5px solid #222",
-            color: step === 0 ? "#2a2a2a" : "#555",
+            border: `1px solid ${C.border}`,
+            color: step === 0 ? C.purpleBorder : C.textMid,
             padding: "7px 20px",
             borderRadius: "6px",
             fontSize: "12px",
@@ -183,8 +183,8 @@ function StepSwitcher({ mode, duration, useDirection }) {
           disabled={step === STEPS.length - 1}
           style={{
             background: "transparent",
-            border: "0.5px solid #222",
-            color: step === STEPS.length - 1 ? "#2a2a2a" : "#555",
+            border: `1px solid ${C.border}`,
+            color: step === STEPS.length - 1 ? C.purpleBorder : C.textMid,
             padding: "7px 20px",
             borderRadius: "6px",
             fontSize: "12px",
@@ -204,7 +204,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>{label}</span>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>{label}</span>
         <div style={{ display: "flex", gap: "6px" }}>
           {options.map((opt) => (
             <button
@@ -213,7 +213,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
               style={{
                 background: value === opt.value ? "#378ADD22" : "transparent",
                 border: value === opt.value ? "1px solid #378ADD" : "0.5px solid #333",
-                color: value === opt.value ? "#378ADD" : "#555",
+                color: value === opt.value ? C.purple : "#555",
                 padding: "3px 10px",
                 borderRadius: "4px",
                 fontSize: "11px",
@@ -226,7 +226,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
           ))}
         </div>
       </div>
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace" }}>{hint}</div>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace" }}>{hint}</div>
     </div>
   );
 }
@@ -236,15 +236,15 @@ function SliderRow({ label, value, min, max, step, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>{label}</span>
-        <span style={{ fontSize: "13px", fontWeight: 500, color: "#378ADD", fontFamily: "monospace" }}>{value}s</span>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>{label}</span>
+        <span style={{ fontSize: "13px", fontWeight: 500, color: C.purple, fontFamily: "monospace" }}>{value}s</span>
       </div>
       <input
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        style={{ width: "100%", accentColor: "#378ADD" }}
+        style={{ width: "100%", accentColor: C.purple }}
       />
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace", marginTop: "4px" }}>{hint}</div>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace", marginTop: "4px" }}>{hint}</div>
     </div>
   );
 }
@@ -254,15 +254,15 @@ function ToggleRow({ label, value, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       <div>
-        <div style={{ fontSize: "12px", color: "#555", fontFamily: "monospace", marginBottom: "2px" }}>{label}</div>
-        <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace" }}>{hint}</div>
+        <div style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace", marginBottom: "2px" }}>{label}</div>
+        <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace" }}>{hint}</div>
       </div>
       <div
         onClick={() => onChange(!value)}
         style={{
           width: "40px", height: "22px", borderRadius: "999px",
-          background: value ? "#378ADD" : "#1e1e1e",
-          border: "0.5px solid #333", position: "relative",
+          background: value ? C.purple : C.border,
+          border: `1px solid ${C.border}`, position: "relative",
           cursor: "pointer", transition: "background 0.2s",
           flexShrink: 0, marginLeft: "1rem",
         }}
@@ -271,7 +271,7 @@ function ToggleRow({ label, value, onChange, hint }) {
           position: "absolute", top: "3px",
           left: value ? "20px" : "3px",
           width: "14px", height: "14px",
-          borderRadius: "50%", background: "#f5f0e8",
+          borderRadius: "50%", background: C.purpleMid,
           transition: "left 0.2s",
         }} />
       </div>
@@ -344,8 +344,8 @@ function StepSwitcher() {
         {/* Live controls */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.25rem 1.5rem",
             marginBottom: "1rem",
@@ -381,8 +381,8 @@ function StepSwitcher() {
         {/* Live preview */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.5rem",
             marginBottom: "0.75rem",
@@ -414,10 +414,10 @@ function StepSwitcher() {
                 ["position: absolute", "Both views occupy the same space during the transition, so they overlap cleanly."],
               ].map(([prop, desc], i, arr) => (
                 <tr key={prop}>
-                  <td style={{ ...s.td, color: "#378ADD", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
+                  <td style={{ ...s.td, color: C.purple, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
                     <code>{prop}</code>
                   </td>
-                  <td style={{ ...s.td, color: "#555", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
+                  <td style={{ ...s.td, color: C.textMid, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
                     {desc}
                   </td>
                 </tr>
@@ -428,7 +428,7 @@ function StepSwitcher() {
 
         {/* Annotation note */}
         <div style={{ ...s.note, marginTop: "1rem" }}>
-          <strong style={{ color: "#378ADD" }}>The pattern in the wild: </strong>
+          <strong style={{ color: C.purple }}>The pattern in the wild: </strong>
           This is exactly how page transitions, tab panels, carousels, and
           onboarding wizards work in production apps. The container has{" "}
           <code>position: relative</code> and a fixed height — both views use{" "}

@@ -5,7 +5,7 @@
 // don't overlap in the cascade.
 
 import { motion } from "framer-motion";
-import { s } from "./styles";
+import { s, C } from "@/components/styles";
 
 export default function ImportStep() {
   return (

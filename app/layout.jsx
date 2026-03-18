@@ -17,8 +17,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body style={{ background: "#0a0a0a", margin: 0 }}>
+    <html lang="en" style={{ colorScheme: "light", background: "#ffffff" }}>
+      <body style={{ background: "#ffffff", margin: 0, minHeight: "100vh" }}>
         {/* Fixed nav — overlays content, no layout impact */}
         <BlogNav />
 

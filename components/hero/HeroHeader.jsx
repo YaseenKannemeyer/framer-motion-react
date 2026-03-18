@@ -17,25 +17,11 @@
 //   stats    → stagger across 3 items, delay 1.1+
 
 import { motion } from "framer-motion";
+import { C } from "@/components/styles";
 
 // ── Typography tokens ────────────────────────────────────────
 const MONO = "'Overpass Mono', 'Courier New', monospace";
 const SERIF = "Georgia, 'Times New Roman', serif";
-
-// ── Colour tokens ────────────────────────────────────────────
-const C = {
-  bg: "#080808",
-  surface: "#0f0f0f",
-  border: "#1c1c1c",
-  muted: "#2a2a2a",
-  dim: "#444",
-  subtle: "#666",
-  mid: "#888",
-  body: "#b0a898",
-  cream: "#f0ebe0",
-  accent: "#4a9eff",
-  accentDim: "#1a3a5c",
-};
 
 // ── Animated word split ──────────────────────────────────────
 // Splits a string into words and animates each individually.
@@ -65,7 +51,7 @@ function WordReveal({ text, color, delay = 0, style = {} }) {
             }}
             style={{
               display: "inline-block",
-              color: color || C.cream,
+              color: color || C.text,
               ...style,
             }}
           >
@@ -96,7 +82,7 @@ function GridOverlay() {
           <path
             d="M 48 0 L 0 0 0 48"
             fill="none"
-            stroke="#fff"
+            stroke={C.purple}
             strokeWidth="0.5"
           />
         </pattern>
@@ -119,7 +105,7 @@ function Stat({ value, label, delay }) {
         style={{
           fontSize: "18px",
           fontWeight: 700,
-          color: C.accent,
+          color: C.purple,
           fontFamily: MONO,
           letterSpacing: "-0.03em",
         }}
@@ -129,7 +115,7 @@ function Stat({ value, label, delay }) {
       <span
         style={{
           fontSize: "10px",
-          color: C.subtle,
+          color: C.textMuted,
           fontFamily: MONO,
           letterSpacing: "0.1em",
           textTransform: "uppercase",
@@ -171,10 +157,10 @@ export default function HeroHeader() {
             display: "inline-flex",
             alignItems: "center",
             gap: "7px",
-            border: `0.5px solid ${C.accentDim}`,
-            borderRadius: "4px",
+            border: `1px solid ${C.purpleBorder}`,
+            borderRadius: "6px",
             padding: "5px 12px",
-            background: "#050d18",
+            background: C.purpleLight,
           }}
         >
           {/* Pulsing dot */}
@@ -185,7 +171,7 @@ export default function HeroHeader() {
               width: "6px",
               height: "6px",
               borderRadius: "50%",
-              background: C.accent,
+              background: C.purple,
               display: "inline-block",
               flexShrink: 0,
             }}
@@ -193,7 +179,7 @@ export default function HeroHeader() {
           <span
             style={{
               fontSize: "10px",
-              color: C.accent,
+              color: C.purple,
               fontFamily: MONO,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
@@ -203,20 +189,20 @@ export default function HeroHeader() {
           </span>
         </motion.div>
 
-        {/* Issue label
+        {/* Issue label */}
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{
             fontSize: "10px",
-            color: C.muted,
+            color: C.textMuted,
             fontFamily: MONO,
             letterSpacing: "0.08em",
           }}
         >
           Vol. 01
-        </motion.span> */}
+        </motion.span>
       </div>
 
       {/* ── Horizontal rule — expands from left ──────────── */}
@@ -226,8 +212,9 @@ export default function HeroHeader() {
           animate={{ width: "100%" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
           style={{
-            height: "0.5px",
-            background: `linear-gradient(to right, ${C.accent}, ${C.border})`,
+            height: "1.5px",
+            background: `linear-gradient(to right, ${C.purple}, ${C.purpleLight})`,
+            borderRadius: "999px",
           }}
         />
       </div>
@@ -242,7 +229,7 @@ export default function HeroHeader() {
           lineHeight: 1.08,
           letterSpacing: "-0.02em",
           margin: "0 0 0.5rem",
-          color: C.cream,
+          color: C.text,
         }}
       >
         {/* Line 1 */}
@@ -252,11 +239,11 @@ export default function HeroHeader() {
 
         {/* Line 2 — accent word stands out */}
         <span style={{ display: "block" }}>
-          <WordReveal text="with" delay={0.6} color={C.body} />
+          <WordReveal text="with" delay={0.6} color={C.textMid} />
           <WordReveal
             text="Framer Motion"
             delay={0.65}
-            color={C.accent}
+            color={C.purple}
             style={{
               fontStyle: "normal",
               fontFamily: MONO,
@@ -273,7 +260,11 @@ export default function HeroHeader() {
           initial={{ width: "0%" }}
           animate={{ width: "40%" }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.85 }}
-          style={{ height: "0.5px", background: C.border }}
+          style={{
+            height: "1px",
+            background: C.purpleMid,
+            borderRadius: "999px",
+          }}
         />
       </div>
 
@@ -285,7 +276,7 @@ export default function HeroHeader() {
         style={{
           fontSize: "15px",
           fontFamily: MONO,
-          color: C.body,
+          color: C.textMid,
           lineHeight: 1.8,
           maxWidth: "520px",
           margin: "0 0 2.5rem",
@@ -293,7 +284,7 @@ export default function HeroHeader() {
         }}
       >
         A beginner's guide to installing, importing, and using motion components
-        to bring your React app to life — with live interactive examples
+        to bring your React app to life, with live interactive examples
         throughout.
       </motion.p>
 
@@ -303,7 +294,7 @@ export default function HeroHeader() {
           display: "flex",
           gap: "2.5rem",
           paddingTop: "2rem",
-          borderTop: `0.5px solid ${C.border}`,
+          borderTop: `1px solid ${C.border}`,
         }}
       >
         <Stat value="8" label="Concepts covered" delay={1.1} />
@@ -321,7 +312,7 @@ export default function HeroHeader() {
           bottom: 0,
           right: 0,
           fontSize: "9px",
-          color: C.muted,
+          color: C.textFaint,
           fontFamily: MONO,
           letterSpacing: "0.1em",
           textTransform: "uppercase",

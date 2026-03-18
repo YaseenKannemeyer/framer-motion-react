@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
-/* Force light theme regardless of OS preference */
-:root,
-:root[data-theme="dark"],
-.dark {
+:root {
   --background: #ffffff;
   --foreground: #1a1523;
   --accent:     #5b21b6;
@@ -16,15 +13,14 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html,
+/* Light theme only — no dark mode override */
+
 body {
-  background: #ffffff !important;
-  color: #1a1523;
+  background: var(--background);
+  color: var(--foreground);
   font-family: Georgia, "Times New Roman", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Prevent any dark-mode override from the browser */
-  color-scheme: light;
 }
 
 /* Scrollbar — deep purple tint */

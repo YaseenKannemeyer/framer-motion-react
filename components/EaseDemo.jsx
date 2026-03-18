@@ -11,8 +11,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { s } from "./styles";
-import { easingMap, solveCubic } from "./utils";
+import { s, C } from "@/components/styles";
+import { easingMap, solveCubic } from "@/components/utils";
 
 // The six easing options shown in the grid
 const EASINGS = [
@@ -81,18 +81,18 @@ export default function EaseDemo() {
             key={e.key}
             onClick={() => handleSelect(e.key)}
             style={{
-              background:  activeEase === e.key ? "#0d1f30" : "#111",
-              border:      activeEase === e.key ? "1px solid #378ADD" : "0.5px solid #1e1e1e",
+              background:   activeEase === e.key ? C.purpleLight : C.surfaceTint,
+              border:       activeEase === e.key ? `1px solid ${C.purple}` : `1px solid ${C.border}`,
               borderRadius: "8px",
-              padding:     "0.75rem 1rem",
-              cursor:      "pointer",
-              transition:  "border-color 0.15s",
+              padding:      "0.75rem 1rem",
+              cursor:       "pointer",
+              transition:   "border-color 0.15s",
             }}
           >
-            <div style={{ fontSize: "12px", fontWeight: 500, color: "#378ADD", fontFamily: "monospace", marginBottom: "4px" }}>
+            <div style={{ fontSize: "12px", fontWeight: 600, color: activeEase === e.key ? C.purple : C.purpleDim, fontFamily: "monospace", marginBottom: "4px" }}>
               {e.key}
             </div>
-            <div style={{ fontSize: "11px", color: "#444", fontFamily: "monospace", lineHeight: 1.4 }}>
+            <div style={{ fontSize: "11px", color: C.textMuted, fontFamily: "monospace", lineHeight: 1.4 }}>
               {e.desc}
             </div>
           </div>
@@ -107,14 +107,14 @@ export default function EaseDemo() {
             width: "32px",
             height: "32px",
             borderRadius: "50%",
-            background: "#378ADD",
+            background: C.purple,
             position: "absolute",
             left: "16px",
             top: "50%",
             transform: "translateY(-50%)",
           }}
         />
-        <span style={{ position: "absolute", right: "16px", fontSize: "10px", color: "#333", fontFamily: "monospace" }}>
+        <span style={{ position: "absolute", right: "16px", fontSize: "10px", color: C.textMuted, fontFamily: "monospace" }}>
           click an ease above, then replay
         </span>
       </div>

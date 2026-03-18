@@ -28,7 +28,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { s } from "./styles";
+import { s, C } from "@/components/styles";
 
 // ── Variant definitions ──────────────────────────────────────
 // Defined outside the component so they're not recreated on
@@ -95,19 +95,19 @@ function FeaturesList({ features, stagger, delay }) {
             key={feature}
             variants={item}
             style={{
-              background: "#111",
-              border: "0.5px solid #1e1e1e",
+              background: C.surface,
+              border: `1px solid ${C.border}`,
               borderRadius: "6px",
               padding: "10px 16px",
               fontSize: "13px",
-              color: "#f5f0e8",
+              color: C.text,
               fontFamily: "monospace",
               display: "flex",
               alignItems: "center",
               gap: "10px",
             }}
           >
-            <span style={{ color: "#378ADD", fontSize: "10px" }}>▸</span>
+            <span style={{ color: C.purple, fontSize: "10px" }}>▸</span>
             {feature}
           </motion.li>
         ))}
@@ -130,10 +130,10 @@ function SliderRow({ label, value, min, max, step, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>
           {label}
         </span>
-        <span style={{ fontSize: "13px", fontWeight: 500, color: "#378ADD", fontFamily: "monospace" }}>
+        <span style={{ fontSize: "13px", fontWeight: 500, color: C.purple, fontFamily: "monospace" }}>
           {value}s
         </span>
       </div>
@@ -144,9 +144,9 @@ function SliderRow({ label, value, min, max, step, onChange, hint }) {
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        style={{ width: "100%", accentColor: "#378ADD" }}
+        style={{ width: "100%", accentColor: C.purple }}
       />
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace", marginTop: "4px" }}>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace", marginTop: "4px" }}>
         {hint}
       </div>
     </div>
@@ -214,8 +214,8 @@ function FeaturesList() {
         {/* Live sliders */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.25rem 1.5rem",
             marginBottom: "1rem",
@@ -244,8 +244,8 @@ function FeaturesList() {
         {/* Live preview */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.5rem",
             marginBottom: "0.75rem",
@@ -277,10 +277,10 @@ function FeaturesList() {
                 ["inheritance",      "Child motion elements inherit the parent's state — no need to repeat initial/animate on each one."],
               ].map(([prop, desc], i, arr) => (
                 <tr key={prop}>
-                  <td style={{ ...s.td, color: "#378ADD", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
+                  <td style={{ ...s.td, color: C.purple, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
                     <code>{prop}</code>
                   </td>
-                  <td style={{ ...s.td, color: "#555", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
+                  <td style={{ ...s.td, color: C.textMid, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
                     {desc}
                   </td>
                 </tr>
@@ -291,7 +291,7 @@ function FeaturesList() {
 
         {/* Annotation note */}
         <div style={{ ...s.note, marginTop: "1rem" }}>
-          <strong style={{ color: "#378ADD" }}>Why variants? </strong>
+          <strong style={{ color: C.purple }}>Why variants? </strong>
           Without variants, animating a list of 10 items means writing{" "}
           <code>initial</code>, <code>animate</code>, and{" "}
           <code>transition</code> on every single <code>motion.li</code>.

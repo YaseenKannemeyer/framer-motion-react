@@ -39,7 +39,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { s } from "./styles";
+import { s, C } from "@/components/styles";
 
 // ── Accordion items ──────────────────────────────────────────
 const ITEMS = [
@@ -90,7 +90,7 @@ function CollapsibleList({ layoutType, stiffness, damping }) {
               layout: { type: "spring", stiffness, damping },
             }}
             style={{
-              background: isOpen ? "#0d1f30" : "#111",
+              background: isOpen ? C.purpleLight : C.surface,
               border: isOpen ? "0.5px solid #378ADD44" : "0.5px solid #1e1e1e",
               borderRadius: "10px",
               padding: "1rem 1.25rem",
@@ -112,7 +112,7 @@ function CollapsibleList({ layoutType, stiffness, damping }) {
               <span style={{
                 fontSize: "13px",
                 fontWeight: 500,
-                color: isOpen ? "#f5f0e8" : "#888",
+                color: isOpen ? C.purple : C.textMuted,
                 fontFamily: "monospace",
                 transition: "color 0.2s",
               }}>
@@ -125,7 +125,7 @@ function CollapsibleList({ layoutType, stiffness, damping }) {
                 transition={{ type: "spring", stiffness, damping }}
                 style={{
                   fontSize: "10px",
-                  color: isOpen ? "#378ADD" : "#444",
+                  color: isOpen ? C.purple : "#444",
                   flexShrink: 0,
                   display: "inline-block",
                 }}
@@ -156,7 +156,7 @@ function CollapsibleList({ layoutType, stiffness, damping }) {
                 >
                   <p style={{
                     fontSize: "12px",
-                    color: "#666",
+                    color: C.textMid,
                     lineHeight: 1.7,
                     fontFamily: "monospace",
                     margin: 0,
@@ -178,7 +178,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>{label}</span>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>{label}</span>
         <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", justifyContent: "flex-end" }}>
           {options.map((opt) => (
             <button
@@ -187,7 +187,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
               style={{
                 background: value === opt.value ? "#378ADD22" : "transparent",
                 border: value === opt.value ? "1px solid #378ADD" : "0.5px solid #333",
-                color: value === opt.value ? "#378ADD" : "#555",
+                color: value === opt.value ? C.purple : "#555",
                 padding: "3px 10px",
                 borderRadius: "4px",
                 fontSize: "11px",
@@ -200,7 +200,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
           ))}
         </div>
       </div>
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace" }}>{hint}</div>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace" }}>{hint}</div>
     </div>
   );
 }
@@ -210,15 +210,15 @@ function SliderRow({ label, value, min, max, step, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>{label}</span>
-        <span style={{ fontSize: "13px", fontWeight: 500, color: "#378ADD", fontFamily: "monospace" }}>{value}</span>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>{label}</span>
+        <span style={{ fontSize: "13px", fontWeight: 500, color: C.purple, fontFamily: "monospace" }}>{value}</span>
       </div>
       <input
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        style={{ width: "100%", accentColor: "#378ADD" }}
+        style={{ width: "100%", accentColor: C.purple }}
       />
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace", marginTop: "4px" }}>{hint}</div>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace", marginTop: "4px" }}>{hint}</div>
     </div>
   );
 }
@@ -288,8 +288,8 @@ function CollapsibleList() {
         {/* Live controls */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.25rem 1.5rem",
             marginBottom: "1rem",
@@ -329,8 +329,8 @@ function CollapsibleList() {
         {/* Live preview */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.5rem",
             marginBottom: "0.75rem",
@@ -362,10 +362,10 @@ function CollapsibleList() {
                 ["FLIP technique",    "Measures DOM before and after change, plays a transform between the two states. No height tweening needed."],
               ].map(([prop, desc], i, arr) => (
                 <tr key={prop}>
-                  <td style={{ ...s.td, color: "#378ADD", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
+                  <td style={{ ...s.td, color: C.purple, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
                     <code>{prop}</code>
                   </td>
-                  <td style={{ ...s.td, color: "#555", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
+                  <td style={{ ...s.td, color: C.textMid, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
                     {desc}
                   </td>
                 </tr>
@@ -376,7 +376,7 @@ function CollapsibleList() {
 
         {/* Annotation note */}
         <div style={{ ...s.note, marginTop: "1rem" }}>
-          <strong style={{ color: "#378ADD" }}>Why layout is special: </strong>
+          <strong style={{ color: C.purple }}>Why layout is special: </strong>
           Before <code>layout</code>, animating an element's height meant
           manually tracking pixel values, using <code>max-height</code> hacks,
           or reaching for a library. Framer Motion's FLIP technique sidesteps

@@ -39,7 +39,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { s } from "./styles";
+import { s, C } from "@/components/styles";
 
 // ── Badge colours ────────────────────────────────────────────
 const BADGE_COLORS = {
@@ -127,7 +127,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>{label}</span>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>{label}</span>
         <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", justifyContent: "flex-end" }}>
           {options.map((opt) => (
             <button
@@ -136,7 +136,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
               style={{
                 background: value === opt.value ? "#378ADD22" : "transparent",
                 border: value === opt.value ? "1px solid #378ADD" : "0.5px solid #333",
-                color: value === opt.value ? "#378ADD" : "#555",
+                color: value === opt.value ? C.purple : "#555",
                 padding: "3px 10px",
                 borderRadius: "4px",
                 fontSize: "11px",
@@ -149,7 +149,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
           ))}
         </div>
       </div>
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace" }}>{hint}</div>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace" }}>{hint}</div>
     </div>
   );
 }
@@ -159,15 +159,15 @@ function SliderRow({ label, value, min, max, step, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>{label}</span>
-        <span style={{ fontSize: "13px", fontWeight: 500, color: "#378ADD", fontFamily: "monospace" }}>{value}</span>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>{label}</span>
+        <span style={{ fontSize: "13px", fontWeight: 500, color: C.purple, fontFamily: "monospace" }}>{value}</span>
       </div>
       <input
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        style={{ width: "100%", accentColor: "#378ADD" }}
+        style={{ width: "100%", accentColor: C.purple }}
       />
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace", marginTop: "4px" }}>{hint}</div>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace", marginTop: "4px" }}>{hint}</div>
     </div>
   );
 }
@@ -221,8 +221,8 @@ function LiveBadge() {
         {/* Live controls */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.25rem 1.5rem",
             marginBottom: "1rem",
@@ -283,8 +283,8 @@ function LiveBadge() {
         {/* Live preview */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "3rem 1.5rem",
             marginBottom: "0.75rem",
@@ -322,10 +322,10 @@ function LiveBadge() {
                 ["boxShadow keyframes", "Framer Motion can animate box-shadow arrays. All values must share the same shadow structure."],
               ].map(([prop, desc], i, arr) => (
                 <tr key={prop}>
-                  <td style={{ ...s.td, color: "#378ADD", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
+                  <td style={{ ...s.td, color: C.purple, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
                     <code>{prop}</code>
                   </td>
-                  <td style={{ ...s.td, color: "#555", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
+                  <td style={{ ...s.td, color: C.textMid, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
                     {desc}
                   </td>
                 </tr>
@@ -336,7 +336,7 @@ function LiveBadge() {
 
         {/* Annotation note */}
         <div style={{ ...s.note, marginTop: "1rem" }}>
-          <strong style={{ color: "#378ADD" }}>Keyframes vs A→B: </strong>
+          <strong style={{ color: C.purple }}>Keyframes vs A→B: </strong>
           Regular Framer Motion animations go from <code>initial</code> to{" "}
           <code>animate</code> — one value to another. Keyframe arrays let you
           chain multiple stops in a single animation:{" "}

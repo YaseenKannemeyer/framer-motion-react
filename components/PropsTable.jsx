@@ -6,7 +6,7 @@
 // doesn't get recreated on every render.
 
 import { motion } from "framer-motion";
-import { s } from "./styles";
+import { s, C } from "@/components/styles";
 
 // Each entry: [propName, description, exampleValue]
 const PROPS = [
@@ -41,21 +41,21 @@ export default function PropsTable() {
               <tr key={prop}>
                 <td style={{
                   ...s.td,
-                  color: "#378ADD",
+                  color: C.purple,
                   borderBottom: i === PROPS.length - 1 ? "none" : s.td.borderBottom,
                 }}>
                   <code>{prop}</code>
                 </td>
                 <td style={{
                   ...s.td,
-                  color: "#555",
+                  color: C.textMid,
                   borderBottom: i === PROPS.length - 1 ? "none" : s.td.borderBottom,
                 }}>
                   {desc}
                 </td>
                 <td style={{
                   ...s.td,
-                  color: "#666",
+                  color: C.textMid,
                   borderBottom: i === PROPS.length - 1 ? "none" : s.td.borderBottom,
                 }}>
                   <code style={{ fontFamily: "monospace", fontSize: "11px" }}>{ex}</code>
@@ -73,7 +73,7 @@ export default function PropsTable() {
         This is why motion props look like: initial={{ opacity: 0 }}
       */}
       <div style={s.note}>
-        <strong style={{ color: "#378ADD" }}>Reading the example: </strong>
+        <strong style={{ color: C.purple }}>Reading the example: </strong>
         <code>{"initial={{ opacity: 0, y: -40 }}"}</code> means the element
         starts invisible and 40px above its natural position.{" "}
         <code>{"animate={{ opacity: 1, y: 0 }}"}</code> moves it back down

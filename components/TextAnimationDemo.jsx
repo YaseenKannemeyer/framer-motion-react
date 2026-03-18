@@ -12,95 +12,44 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { s } from "@/components/styles";
+import { s, C } from "@/components/styles";
 
 const MONO = "'Overpass Mono', 'Courier New', monospace";
 
 // ── Direction presets ────────────────────────────────────────
 const DIRECTIONS = [
-  {
-    label: "↓ from above",
-    initial: { opacity: 0, y: -40 },
-    animate: { opacity: 1, y: 0 },
-  },
-  {
-    label: "↑ from below",
-    initial: { opacity: 0, y: 40 },
-    animate: { opacity: 1, y: 0 },
-  },
-  {
-    label: "→ from left",
-    initial: { opacity: 0, x: -40 },
-    animate: { opacity: 1, x: 0 },
-  },
-  {
-    label: "← from right",
-    initial: { opacity: 0, x: 40 },
-    animate: { opacity: 1, x: 0 },
-  },
-  {
-    label: "⊕ scale up",
-    initial: { opacity: 0, scale: 0.7 },
-    animate: { opacity: 1, scale: 1 },
-  },
+  { label: "↓ from above", initial: { opacity: 0, y: -40 }, animate: { opacity: 1, y: 0 } },
+  { label: "↑ from below", initial: { opacity: 0, y:  40 }, animate: { opacity: 1, y: 0 } },
+  { label: "→ from left",  initial: { opacity: 0, x: -40 }, animate: { opacity: 1, x: 0 } },
+  { label: "← from right", initial: { opacity: 0, x:  40 }, animate: { opacity: 1, x: 0 } },
+  { label: "⊕ scale up",   initial: { opacity: 0, scale: 0.7 }, animate: { opacity: 1, scale: 1 } },
 ];
 
 // ── Ease options ─────────────────────────────────────────────
 const EASES = [
-  { label: "easeOut", value: "easeOut" },
+  { label: "easeOut",   value: "easeOut"   },
   { label: "easeInOut", value: "easeInOut" },
-  { label: "easeIn", value: "easeIn" },
-  { label: "backOut", value: "backOut" },
+  { label: "easeIn",    value: "easeIn"    },
+  { label: "backOut",   value: "backOut"   },
 ];
 
 // ── SelectRow ────────────────────────────────────────────────
-function SelectRow({
-  label,
-  value,
-  options,
-  onChange,
-  getVal = (o) => o.value,
-}) {
+function SelectRow({ label, value, options, onChange, getVal = (o) => o.value }) {
   return (
     <div style={{ marginBottom: "0.875rem" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "5px",
-        }}
-      >
-        <span
-          style={{
-            fontSize: "10px",
-            color: "#444",
-            fontFamily: MONO,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-          }}
-        >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
+        <span style={{ fontSize: "10px", color: C.textMuted, fontFamily: MONO, letterSpacing: "0.08em", textTransform: "uppercase" }}>
           {label}
         </span>
-        <div
-          style={{
-            display: "flex",
-            gap: "5px",
-            flexWrap: "wrap",
-            justifyContent: "flex-end",
-          }}
-        >
+        <div style={{ display: "flex", gap: "5px", flexWrap: "wrap", justifyContent: "flex-end" }}>
           {options.map((opt) => (
             <button
               key={opt.label}
               onClick={() => onChange(getVal(opt))}
               style={{
-                background: value === getVal(opt) ? "#0d1f30" : "transparent",
-                border:
-                  value === getVal(opt)
-                    ? "1px solid #4a9eff"
-                    : "0.5px solid #222",
-                color: value === getVal(opt) ? "#4a9eff" : "#444",
+                background: value === getVal(opt) ? C.purpleLight : "transparent",
+                border: value === getVal(opt) ? `1px solid ${C.purple}` : `1px solid ${C.border}`,
+                color: value === getVal(opt) ? C.purple : "#444",
                 padding: "3px 9px",
                 borderRadius: "4px",
                 fontSize: "10px",
@@ -123,44 +72,18 @@ function SelectRow({
 function SliderRow({ label, value, min, max, step, onChange, display }) {
   return (
     <div style={{ marginBottom: "0.875rem" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "baseline",
-          marginBottom: "5px",
-        }}
-      >
-        <span
-          style={{
-            fontSize: "10px",
-            color: "#444",
-            fontFamily: MONO,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-          }}
-        >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "5px" }}>
+        <span style={{ fontSize: "10px", color: C.textMuted, fontFamily: MONO, letterSpacing: "0.08em", textTransform: "uppercase" }}>
           {label}
         </span>
-        <span
-          style={{
-            fontSize: "12px",
-            fontWeight: 500,
-            color: "#4a9eff",
-            fontFamily: MONO,
-          }}
-        >
+        <span style={{ fontSize: "12px", fontWeight: 500, color: C.purple, fontFamily: MONO }}>
           {display ?? value}
         </span>
       </div>
       <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
+        type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        style={{ width: "100%", accentColor: "#4a9eff" }}
+        style={{ width: "100%", accentColor: C.purple }}
       />
     </div>
   );
@@ -171,7 +94,7 @@ function Preview({ replayKey, direction, ease, duration }) {
   return (
     <div
       style={{
-        background: "#080808",
+        background: C.bg,
         border: "0.5px solid #1a1a1a",
         borderRadius: "8px",
         minHeight: "130px",
@@ -184,18 +107,16 @@ function Preview({ replayKey, direction, ease, duration }) {
       }}
     >
       {/* Corner label */}
-      <span
-        style={{
-          position: "absolute",
-          top: "10px",
-          left: "14px",
-          fontSize: "9px",
-          color: "#222",
-          fontFamily: MONO,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-        }}
-      >
+      <span style={{
+        position: "absolute",
+        top: "10px",
+        left: "14px",
+        fontSize: "9px",
+        color: C.purpleBorder,
+        fontFamily: MONO,
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+      }}>
         live preview
       </span>
 
@@ -205,17 +126,15 @@ function Preview({ replayKey, direction, ease, duration }) {
         animate={direction.animate}
         transition={{ duration, ease }}
       >
-        <h2
-          style={{
-            fontSize: "clamp(1.4rem, 4vw, 2.2rem)",
-            fontWeight: 400,
-            fontStyle: "italic",
-            color: "#f0ebe0",
-            margin: 0,
-            fontFamily: "Georgia, serif",
-            letterSpacing: "-0.02em",
-          }}
-        >
+        <h2 style={{
+          fontSize: "clamp(1.4rem, 4vw, 2.2rem)",
+          fontWeight: 400,
+          fontStyle: "italic",
+          color: C.text,
+          margin: 0,
+          fontFamily: "Georgia, serif",
+          letterSpacing: "-0.02em",
+        }}>
           Hello, world!
         </h2>
       </motion.div>
@@ -237,24 +156,24 @@ function CodePreview({ direction, ease, duration }) {
     " }";
 
   return (
-    <pre
-      style={{ ...s.pre, margin: "0 0 0.75rem", fontSize: "11px" }}
-    >{`<motion.div
+    <pre style={{ ...s.pre, margin: "0 0 0.75rem", fontSize: "11px" }}>{
+`<motion.div
   initial={${fmt(d.initial)}}
   animate={${fmt(d.animate)}}
   transition={{ duration: ${duration}, ease: "${ease}" }}
 >
   <h1>Hello, world!</h1>
-</motion.div>`}</pre>
+</motion.div>`
+    }</pre>
   );
 }
 
 // ── Main export ──────────────────────────────────────────────
 export default function TextAnimationDemo() {
-  const [replayKey, setReplayKey] = useState(0);
-  const [dirIndex, setDirIndex] = useState(0);
-  const [ease, setEase] = useState("easeInOut");
-  const [duration, setDuration] = useState(0.8);
+  const [replayKey,  setReplayKey]  = useState(0);
+  const [dirIndex,   setDirIndex]   = useState(0);
+  const [ease,       setEase]       = useState("easeInOut");
+  const [duration,   setDuration]   = useState(0.8);
 
   const direction = DIRECTIONS[dirIndex];
 
@@ -269,34 +188,27 @@ export default function TextAnimationDemo() {
       <div style={s.sectionLabel}>Text entrance animation</div>
 
       <div style={s.stepCard}>
+
         {/* ── Live controls ─────────────────────────────── */}
-        <div
-          style={{
-            background: "#080808",
-            border: "0.5px solid #1a1a1a",
-            borderRadius: "8px",
-            padding: "1rem 1.25rem",
-            marginBottom: "0.75rem",
-          }}
-        >
+        <div style={{
+          background: C.bg,
+          border: "0.5px solid #1a1a1a",
+          borderRadius: "8px",
+          padding: "1rem 1.25rem",
+          marginBottom: "0.75rem",
+        }}>
           <SelectRow
             label="direction"
             value={dirIndex}
             options={DIRECTIONS.map((d, i) => ({ label: d.label, value: i }))}
-            onChange={(i) => {
-              setDirIndex(i);
-              replay();
-            }}
+            onChange={(i) => { setDirIndex(i); replay(); }}
             getVal={(o) => o.value}
           />
           <SelectRow
             label="ease"
             value={ease}
             options={EASES}
-            onChange={(v) => {
-              setEase(v);
-              replay();
-            }}
+            onChange={(v) => { setEase(v); replay(); }}
           />
           <SliderRow
             label="duration"
@@ -304,10 +216,7 @@ export default function TextAnimationDemo() {
             min={0.2}
             max={2}
             step={0.05}
-            onChange={(v) => {
-              setDuration(v);
-              replay();
-            }}
+            onChange={(v) => { setDuration(v); replay(); }}
             display={`${duration}s`}
           />
         </div>
@@ -324,17 +233,8 @@ export default function TextAnimationDemo() {
         />
 
         {/* ── Replay + key explanation ──────────────────── */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "1rem",
-          }}
-        >
-          <span
-            style={{ fontSize: "10px", color: "#2a2a2a", fontFamily: MONO }}
-          >
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem" }}>
+          <span style={{ fontSize: "10px", color: C.purpleBorder, fontFamily: MONO }}>
             key={`{${replayKey}}`} — increments on each replay
           </span>
           <button style={s.replayBtn} onClick={replay}>
@@ -344,14 +244,15 @@ export default function TextAnimationDemo() {
 
         {/* ── Key prop explanation ──────────────────────── */}
         <div style={{ ...s.note }}>
-          <strong style={{ color: "#4a9eff" }}>The key prop trick: </strong>
-          Framer Motion entrance animations fire once — on mount. To replay
-          them, increment a <code>key</code> prop on the <code>motion</code>{" "}
-          element. React sees a new key, unmounts the old element, mounts a
-          fresh one, and the <code>initial → animate</code> transition fires
-          again from scratch. Without this, the animation runs once and stays
-          frozen. Watch the counter above — it increments every time you hit
-          Replay or change a control.
+          <strong style={{ color: C.purple }}>The key prop trick: </strong>
+          Framer Motion entrance animations fire once — on mount.
+          To replay them, increment a <code>key</code> prop on the{" "}
+          <code>motion</code> element. React sees a new key, unmounts
+          the old element, mounts a fresh one, and the{" "}
+          <code>initial → animate</code> transition fires again from
+          scratch. Without this, the animation runs once and stays frozen.
+          Watch the counter above — it increments every time you hit Replay
+          or change a control.
         </div>
       </div>
     </motion.div>

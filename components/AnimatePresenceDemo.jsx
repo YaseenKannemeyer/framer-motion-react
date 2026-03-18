@@ -29,32 +29,32 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { s } from "./styles";
+import { s, C } from "@/components/styles";
 
 // ── Alert types ──────────────────────────────────────────────
 const ALERT_TYPES = {
   error: {
     label: "Error",
-    bg:     "#1a0a0a",
-    border: "#3a1a1a",
-    color:  "#f87171",
+    bg: "#fff1f2",
+    border: "#fecdd3",
+    color: "#be123c",
     dot:    "#ef4444",
     text:   "Something went wrong. Please try again.",
   },
   success: {
     label: "Success",
-    bg:     "#0a1a0f",
-    border: "#1a3a22",
-    color:  "#4ade80",
-    dot:    "#22c55e",
+    bg: "#f0fdf4",
+    border: "#bbf7d0",
+    color: "#15803d",
+    dot: "#22c55e",
     text:   "Changes saved successfully.",
   },
   info: {
     label: "Info",
-    bg:     "#0a1220",
-    border: "#1a2a44",
-    color:  "#60a5fa",
-    dot:    "#3b82f6",
+    bg: "#eff6ff",
+    border: "#bfdbfe",
+    color: "#1d4ed8",
+    dot: "#3b82f6",
     text:   "Your session will expire in 5 minutes.",
   },
 };
@@ -80,7 +80,7 @@ function DismissableAlert({ alertType, mode, duration, exitDir }) {
           style={{
             background: "transparent",
             border: open ? "1px solid #378ADD" : "0.5px solid #333",
-            color: open ? "#378ADD" : "#666",
+            color: open ? C.purple : "#666",
             padding: "8px 24px",
             borderRadius: "6px",
             fontSize: "12px",
@@ -140,15 +140,15 @@ function SliderRow({ label, value, min, max, step, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>{label}</span>
-        <span style={{ fontSize: "13px", fontWeight: 500, color: "#378ADD", fontFamily: "monospace" }}>{value}s</span>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>{label}</span>
+        <span style={{ fontSize: "13px", fontWeight: 500, color: C.purple, fontFamily: "monospace" }}>{value}s</span>
       </div>
       <input
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        style={{ width: "100%", accentColor: "#378ADD" }}
+        style={{ width: "100%", accentColor: C.purple }}
       />
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace", marginTop: "4px" }}>{hint}</div>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace", marginTop: "4px" }}>{hint}</div>
     </div>
   );
 }
@@ -158,7 +158,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>{label}</span>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>{label}</span>
         <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", justifyContent: "flex-end" }}>
           {options.map((opt) => (
             <button
@@ -167,7 +167,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
               style={{
                 background: value === opt.value ? "#378ADD22" : "transparent",
                 border: value === opt.value ? "1px solid #378ADD" : "0.5px solid #333",
-                color: value === opt.value ? "#378ADD" : "#555",
+                color: value === opt.value ? C.purple : "#555",
                 padding: "3px 10px",
                 borderRadius: "4px",
                 fontSize: "11px",
@@ -180,7 +180,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
           ))}
         </div>
       </div>
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace" }}>{hint}</div>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace" }}>{hint}</div>
     </div>
   );
 }
@@ -239,8 +239,8 @@ function DismissableAlert() {
         {/* Live controls */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.25rem 1.5rem",
             marginBottom: "1rem",
@@ -292,8 +292,8 @@ function DismissableAlert() {
         {/* Live preview */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.5rem",
             marginBottom: "0.75rem",
@@ -327,10 +327,10 @@ function DismissableAlert() {
                 ["key",               "AnimatePresence tracks children by key. Changing key = exit old, enter new."],
               ].map(([prop, desc], i, arr) => (
                 <tr key={prop}>
-                  <td style={{ ...s.td, color: "#378ADD", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
+                  <td style={{ ...s.td, color: C.purple, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
                     <code>{prop}</code>
                   </td>
-                  <td style={{ ...s.td, color: "#555", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
+                  <td style={{ ...s.td, color: C.textMid, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
                     {desc}
                   </td>
                 </tr>
@@ -341,7 +341,7 @@ function DismissableAlert() {
 
         {/* Annotation note */}
         <div style={{ ...s.note, marginTop: "1rem" }}>
-          <strong style={{ color: "#378ADD" }}>The key insight: </strong>
+          <strong style={{ color: C.purple }}>The key insight: </strong>
           React removes elements from the DOM synchronously — there is no
           "about to unmount" phase for animations to hook into. This is exactly
           what <code>AnimatePresence</code> solves. It intercepts the unmount,

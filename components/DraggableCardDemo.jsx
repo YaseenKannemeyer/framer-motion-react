@@ -32,7 +32,7 @@
 
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { s } from "./styles";
+import { s, C } from "@/components/styles";
 
 // ── Live DraggableCard ───────────────────────────────────────
 // The actual component readers can copy. All drag behaviour
@@ -53,8 +53,8 @@ function DraggableCard({ elastic, snapToOrigin, dragAxis }) {
         width: "140px",
         padding: "20px",
         borderRadius: "12px",
-        background: "#f5f0e8",
-        color: "#0a0a0a",
+        background: C.surface,
+        color: C.text,
         fontSize: "14px",
         fontWeight: 600,
         textAlign: "center",
@@ -74,10 +74,10 @@ function SliderRow({ label, value, min, max, step, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>
           {label}
         </span>
-        <span style={{ fontSize: "13px", fontWeight: 500, color: "#378ADD", fontFamily: "monospace" }}>
+        <span style={{ fontSize: "13px", fontWeight: 500, color: C.purple, fontFamily: "monospace" }}>
           {value}
         </span>
       </div>
@@ -88,9 +88,9 @@ function SliderRow({ label, value, min, max, step, onChange, hint }) {
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        style={{ width: "100%", accentColor: "#378ADD" }}
+        style={{ width: "100%", accentColor: C.purple }}
       />
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace", marginTop: "4px" }}>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace", marginTop: "4px" }}>
         {hint}
       </div>
     </div>
@@ -102,10 +102,10 @@ function ToggleRow({ label, value, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       <div>
-        <div style={{ fontSize: "12px", color: "#555", fontFamily: "monospace", marginBottom: "2px" }}>
+        <div style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace", marginBottom: "2px" }}>
           {label}
         </div>
-        <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace" }}>
+        <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace" }}>
           {hint}
         </div>
       </div>
@@ -115,8 +115,8 @@ function ToggleRow({ label, value, onChange, hint }) {
           width: "40px",
           height: "22px",
           borderRadius: "999px",
-          background: value ? "#378ADD" : "#1e1e1e",
-          border: "0.5px solid #333",
+          background: value ? C.purple : C.border,
+          border: `1px solid ${C.border}`,
           position: "relative",
           cursor: "pointer",
           transition: "background 0.2s",
@@ -131,7 +131,7 @@ function ToggleRow({ label, value, onChange, hint }) {
           width: "14px",
           height: "14px",
           borderRadius: "50%",
-          background: "#f5f0e8",
+          background: C.surface,
           transition: "left 0.2s",
         }} />
       </div>
@@ -144,7 +144,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: "#555", fontFamily: "monospace" }}>{label}</span>
+        <span style={{ fontSize: "12px", color: C.textMid, fontFamily: "monospace" }}>{label}</span>
         <div style={{ display: "flex", gap: "6px" }}>
           {options.map((opt) => (
             <button
@@ -153,7 +153,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
               style={{
                 background: value === opt.value ? "#378ADD22" : "transparent",
                 border: value === opt.value ? "1px solid #378ADD" : "0.5px solid #333",
-                color: value === opt.value ? "#378ADD" : "#555",
+                color: value === opt.value ? C.purple : "#555",
                 padding: "3px 10px",
                 borderRadius: "4px",
                 fontSize: "11px",
@@ -166,7 +166,7 @@ function SelectRow({ label, value, options, onChange, hint }) {
           ))}
         </div>
       </div>
-      <div style={{ fontSize: "10px", color: "#333", fontFamily: "monospace" }}>{hint}</div>
+      <div style={{ fontSize: "10px", color: C.textMuted, fontFamily: "monospace" }}>{hint}</div>
     </div>
   );
 }
@@ -206,8 +206,8 @@ function DraggableCard() {
         {/* Live controls */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "1.25rem 1.5rem",
             marginBottom: "1rem",
@@ -244,8 +244,8 @@ function DraggableCard() {
         {/* Live preview */}
         <div
           style={{
-            background: "#0d0d0d",
-            border: "0.5px solid #1e1e1e",
+            background: C.surfaceTint,
+            border: `1px solid ${C.border}`,
             borderRadius: "8px",
             padding: "3rem 1.5rem",
             display: "flex",
@@ -291,10 +291,10 @@ function DraggableCard() {
                 ["onDragEnd",         "Callback fired on release. Receives event + info including final velocity."],
               ].map(([prop, desc], i, arr) => (
                 <tr key={prop}>
-                  <td style={{ ...s.td, color: "#378ADD", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
+                  <td style={{ ...s.td, color: C.purple, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom, whiteSpace: "nowrap" }}>
                     <code>{prop}</code>
                   </td>
-                  <td style={{ ...s.td, color: "#555", borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
+                  <td style={{ ...s.td, color: C.textMid, borderBottom: i === arr.length - 1 ? "none" : s.td.borderBottom }}>
                     {desc}
                   </td>
                 </tr>
@@ -305,7 +305,7 @@ function DraggableCard() {
 
         {/* Annotation note */}
         <div style={{ ...s.note, marginTop: "1rem" }}>
-          <strong style={{ color: "#378ADD" }}>Things to try: </strong>
+          <strong style={{ color: C.purple }}>Things to try: </strong>
           Set <code>dragElastic</code> to <code>0</code> for a hard boundary
           that stops dead, then <code>1</code> for a fully elastic feel with
           no resistance. Toggle <code>dragSnapToOrigin</code> on to make the
